@@ -23,8 +23,9 @@ CNN architecture is illustrated below:
 
 ---
 
-This method is detailed in the following paper, where it is compared with other techniques. If you find this code useful, please consider citing the paper.
-
+This method is detailed in the following paper which will be presented in Biosignals conference 2026, where it is compared with other techniques. If you find this code useful, please consider citing the paper.
+"Investigating the Applicability of ECG Signals for Neonatal Seizure
+Detection Using ECG Spectrograms and CNN-ViT"
 ---
 
 ## Installation
