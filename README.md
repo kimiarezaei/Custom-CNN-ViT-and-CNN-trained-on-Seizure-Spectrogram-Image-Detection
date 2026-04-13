@@ -27,6 +27,13 @@ All results and detailed information are available in my paper "Investigating th
 which was presented at the Biosignals conference, 2026. 
 >Available at: https://www.scitepress.org/Papers/2026/143263/143263.pdf
 
+``` bash
+@article{rezaei2026investigating,
+  title={Investigating the Applicability of ECG Signals for Neonatal Seizure Detection Using ECG Spectrograms and CNN-ViT},
+  author={Rezaei, Kimia and Mathieson, Sean R and Lightbody, Gordon and Boylan, Geraldin B and Marnane, William P},
+  year={2026}
+}
+```
 ---
 
 ## Installation
