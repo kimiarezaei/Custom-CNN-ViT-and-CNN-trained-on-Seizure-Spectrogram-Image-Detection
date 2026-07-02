@@ -35,11 +35,11 @@ class MyCNNViT(nn.Module):
     def __init__(self, params):
         super().__init__()
         # tensors obtained from resized matrices
-        self.patch_embedding = PatchEmbedding(params.img_W, params.img_H, params.kernel_size, params.embedding_dim)           # output size:  224//14  and  224//14   so 16*16=256 number of batches
+        self.patch_embedding = PatchEmbedding(params.img_W, params.img_H, params.kernel_size, params.embedding_dim)          
         
         # Embedding
-        self.cls_token = nn.Parameter(torch.randn(1, 1, params.embedding_dim) )        # cls token is introduced as a learnable parameter
-        num_steps = self.patch_embedding.num_patches + 1  # Add the cls token
+        self.cls_token = nn.Parameter(torch.randn(1, 1, params.embedding_dim) )         # cls token is introduced as a learnable parameter
+        num_steps = self.patch_embedding.num_patches + 1                                # Add the cls token
         # Positional embeddings are learnable
         self.pos_embedding = nn.Parameter(torch.randn(1, num_steps, params.embedding_dim))
         self.dropout = nn.Dropout(params.drop_out_stoch)
