@@ -9,6 +9,20 @@ The project was trained and evaluated on private clinical data, therefor, datase
 which was presented at the Biosignals conference, 2026. 
 >Available at: https://www.scitepress.org/Papers/2026/143263/143263.pdf
 
+
+## Method Summary
+
+### CNN
+
+The CNN baseline uses stacked convolution, batch normalization, ReLU, max pooling, adaptive average pooling, and a small fully connected classifier head.
+![Model Architecture](images/CNNmodel_seizure.png)
+
+### CNN-ViT
+
+The CNN-ViT model converts each spectrogram into patch embeddings, prepends a learnable `[CLS]` token, adds learnable positional embeddings, and processes the sequence with transformer encoder blocks before classification.
+![Model Architecture](images/cnnvit.png)
+
+
 ## What This Project Does
 
 The goal is to classify spectrogram images into seizure and non-seizure classes using supervised deep learning. Both model variants follow the same experimental protocol:
@@ -19,6 +33,17 @@ The goal is to classify spectrogram images into seizure and non-seizure classes 
 - Learning-rate scheduling with warmup and cosine annealing
 - Per-fold test evaluation with accuracy, AUC, F1 score, MCC, confusion matrix, and ROC curve output
 - MLOps habits such as configuration-driven experiments, reproducible seeding, patient-level splitting to avoid leakage, Weights & Biases tracking, saved model artifacts, structured result outputs, and hardware-aware training with GPU/CPU fallback were used
+
+
+## Data Format
+
+The spectrogram tensors and corresponding labels were serialized using PyTorch .pt format to enable efficient storage and fast data loading during training. Each `.pt` file should contain at least:
+
+- `spectrogram` - the input tensor
+- `seizure` - the binary label
+
+The loader reads all files from their folders, concatenates them into a single dataset, and groups samples by patient ID to avoid leakage across cross-validation folds.
+
 
 ## Repository Structure
 
@@ -37,27 +62,6 @@ Each folder contains:
 - `utils.py` - parameter handling, model saving, and device utilities
 - `parameters/` - JSON hyperparameter configuration
 
-## Data Format
-
-The spectrogram tensors and corresponding labels were serialized using PyTorch .pt format to enable efficient storage and fast data loading during training. Each `.pt` file should contain at least:
-
-- `spectrogram` - the input tensor
-- `seizure` - the binary label
-
-The loader reads all files from their folders, concatenates them into a single dataset, and groups samples by patient ID to avoid leakage across cross-validation folds.
-
-
-## Method Summary
-
-### CNN
-
-The CNN baseline uses stacked convolution, batch normalization, ReLU, max pooling, adaptive average pooling, and a small fully connected classifier head.
-![Model Architecture](images/CNNmodel_seizure.png)
-
-### CNN-ViT
-
-The CNN-ViT model converts each spectrogram into patch embeddings, prepends a learnable `[CLS]` token, adds learnable positional embeddings, and processes the sequence with transformer encoder blocks before classification.
-![Model Architecture](images/cnnvit.png)
 
 ## How to Run
 Install the dependencies from the included `requirements.txt`.
